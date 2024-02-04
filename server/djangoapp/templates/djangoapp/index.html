@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <title>Dealership Review</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -14,9 +15,23 @@
 </head>
 
     <body>
-    <!-- Remove this line the first time you edit this file -->
-     This is the index page of your Django app!
-    <!--Add a nav bar here -->
+        <nav class="navbar navbar-light bg-light">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Best Cars</a>
+                </div>
+                <ul class="nav nav-pills nav-fill navbar-right">
+                    <div class="input-group">
+                        <li class="nav-item">
+                            <a class="nav-link" href="about">About Us </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact">Contact Us </a>
+                        </li>
+                    </div>
+                </ul>
+            </div>
+        </nav>
 
     <!--Add a dealer table here -->
 
