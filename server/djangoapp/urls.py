@@ -8,7 +8,7 @@ urlpatterns = [
     # route is a string contains a URL pattern
     # view refers to the view function
     # name the URL
-
+    path(route='', view=views.index, name='index'),
     # path for about view
     path(route='about', view=views.about, name='about'),
     # path for contact us view
@@ -16,11 +16,11 @@ urlpatterns = [
     # path for registration
 
     # path for login
-
+    path('login', views.login_request, name="login"),
     # path for logout
-
-    path(route='', view=views.index, name='index'),
-
+    path('logout', views.logout_request, name="logout"),
+    # path for signup
+    path('signup', views.registration_request, name="signup"),
     # path for dealer reviews view
 
     # path for add a review view

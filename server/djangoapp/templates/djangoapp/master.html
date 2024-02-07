@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Dealership Review</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -14,24 +15,45 @@
 
 </head>
 
-    <body>
+    <body style="padding-bottom: 120px">
         <nav class="navbar navbar-light bg-light">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="{% url 'djangoapp:index' %}">Best Cars</a>
+                    <a class="navbar-brand" href="{% url 'djangoapp:index' %}">Dealership Review</a>
                 </div>
                 <ul class="nav nav-pills nav-fill navbar-right">
                     <div class="input-group">
+                        {% if user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'djangoapp:about' %}">About Us </a>
+                            <i class="bi bi-person-fill"></i>
+                            <span class="navbar-text text-dark">{{ user.get_username }}</span>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'djangoapp:logout' %}">Logout</a>
+                        </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <form class="form-inline my-2 my-lg-0" action ="{% url 'djangoapp:login' %}" method="post">
+                                {% csrf_token %}
+                                <input class="form-control mr-sm-2" type="text" placeholder="Username" name="username">
+                                <input class="form-control mr-sm-2" type="password" placeholder="Password" name="password">
+                                <button class="btn btn-primary my-2 my-sm-0" type="submit">Login</button>
+                            </form>
+                            {% if message %}
+                                <p>{{message}}</p>
+                            {% endif %}
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'djangoapp:signup' %}">Sign Up</a>
+                        </li>
+                        {% endif %}
                     </div>
                 </ul>
             </div>
         </nav>
         {% block mytemplate %}
 
-        {% endblock %}
+        {% endblock %}     
     <footer class="footer fixed-bottom text-white bg-dark">
         <section>
         <div class="container text-center text-md-start mt-5" >
@@ -40,8 +62,11 @@
                     <p>© Best Cars Copyright</p>
                 </div>
                 <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                <a class="nav-link text-white" href="{% url 'djangoapp:contact' %}">Contact Us </a>
-            </div>
+                    <a class="nav-link text-white" href="{% url 'djangoapp:contact' %}">Contact Us </a>
+                </div>
+                <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                    <a class="nav-link text-white" href="{% url 'djangoapp:about' %}">About Us </a>
+                </div>
             </div>
         </div>
         </section>
