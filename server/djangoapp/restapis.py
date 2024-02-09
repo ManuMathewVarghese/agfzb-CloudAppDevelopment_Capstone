@@ -48,8 +48,12 @@ def analyze_review_sentiments(dealerreview):
 
 def get_dealers_from_cf(url, **kwargs):
     results = []
-    # Call get_request with a URL parameter
-    json_result = get_request(url)
+    if 'id' in kwargs:
+        json_result = get_request(url, id=kwargs.get("id"))
+    elif 'state' in kwargs:
+        json_result = get_request(url, state=kwargs.get("state"))
+    else:
+        json_result = get_request(url)
     if json_result:
         # Get the row list in JSON as dealers
         dealers = json_result
@@ -96,3 +100,13 @@ def get_dealer_reviews_from_cf(url, dealerId):
             )
             results.append(dealer_review_obj)
     return results
+
+def get_dealer_by_id(dealer_id):
+    id = dealer_id
+    #url = "https://madavanamanu-3000.theiadockernext-1-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/dealerships/get"
+    return get_dealers_from_cf(url, id=id)
+
+def get_dealers_by_state(dealer_state):
+    state = dealer_state
+    #url = "https://madavanamanu-3000.theiadockernext-1-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/dealerships/get"
+    return get_dealers_from_cf(url, state=state)
