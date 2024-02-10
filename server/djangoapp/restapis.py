@@ -91,9 +91,9 @@ def get_dealer_reviews_from_cf(url, dealerId):
                 name=dealer_doc["name"], 
                 review=dealer_doc["review"], 
                 purchase=dealer_doc["purchase"], 
-                car_make= 'H', 
-                car_model= 'G', 
-                car_year= 2023,
+                car_make= dealer_doc["car_make"], 
+                car_model= dealer_doc["car_model"], 
+                car_year= dealer_doc["car_year"],
                 sentiment= analyze_review_sentiments(dealer_doc["review"]),
                 id=dealer_review["id"],
                 #purchase_date
@@ -101,7 +101,7 @@ def get_dealer_reviews_from_cf(url, dealerId):
             results.append(dealer_review_obj)
     return results
 
-def get_dealer_by_id(dealer_id):
+def get_dealer_by_id(url, dealer_id):
     id = dealer_id
     #url = "https://madavanamanu-3000.theiadockernext-1-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/dealerships/get"
     return get_dealers_from_cf(url, id=id)
